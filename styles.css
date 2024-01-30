@@ -1,0 +1,137 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600&family=Press+Start+2P&display=swap');
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 50px;
+    font-family: 'Pixelify', sans-serif;
+
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 15px 50px;
+    background: linear-gradient(#6fa2c2, #17394f);
+}
+
+.title{
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.8;
+    text-align: center;
+    color: #ffff;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    width: 460px;
+    line-height: 50px;
+    background: #FFFF;
+    border-radius: 6px;
+}
+
+.input {
+    flex-grow: 1;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1;
+    color: black;
+
+}
+.btn {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1;
+    color: #fff;
+    width: 145px;
+    height: 50px;
+    background: #c44848;
+    border-radius: 6px;
+    transition: background-color 0.2s ease-in;
+}
+
+.btn:hover {
+    background: #e80b0b;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    position: relative;
+    padding: 30px;
+    width: 360px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-shadow: 0px 5px 20px rgba(27,108,114,0.25);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    width: calc(100% - 20px);
+    height: 100%;
+    left: 10px;
+    bottom: -10px;
+    z-index: -1;
+    background: #fff;
+    box-shadow: 0px 5px 20px rgba(27,108,114,0.25);
+    border-radius: 6px;
+}
+
+.card-city {
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 1;
+    color: black;
+}
+
+.card-city span {
+    display: inline-block;
+    vertical-align: text-top;
+    padding: 3px 5px;
+    background: #e80b0b;
+    border-radius: 6px;
+    color: #ffff;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.card-weather{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-value {
+    font-size: 92px;
+    line-height: 1;
+}
+
+.card-value sup{
+    font-size: 50%;
+
+}
+
+.card-desc {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.card-img {
+    width: 120px;
+}
+
+.loading-icon {
+    font-size: 2rem;
+    margin-right: 10px;
+    color: #3498db; /* Цвет иконки загрузки */
+}
