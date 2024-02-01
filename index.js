@@ -46,13 +46,18 @@ function getCard(weatherData) {
 }
 
 async function loadWeatherIcon(iconUrl) {
-    const response = await fetch(iconUrl);
-    if (response.ok) {
-        // Если успешно загружена иконка, скрываем иконку загрузки
-        const loadingIcon = document.querySelector('.loading-icon');
-        if (loadingIcon) {
-            loadingIcon.style.display = 'none';
+    try {
+        const response = await axios.get(iconUrl, { responseType: 'blob' });
+
+        if (response.status === 200) {
+            // Если успешно загружена иконка, скрываем иконку загрузки
+            const loadingIcon = document.querySelector('.loading-icon');
+            if (loadingIcon) {
+                loadingIcon.style.display = 'none';
+            }
         }
+    } catch (error) {
+        console.error('Error loading weather icon:', error);
     }
 }
 
@@ -60,26 +65,24 @@ async function getWeather(city) {
     const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
     try {
-        const response = await fetch(url);
+        const response = await axios.get(url);
 
-        if (!response.ok) {
-            throw new Error('Сервер не доступен');
-        }
+        if (response.status === 200) {
+            const data = response.data;
 
-        const data = await response.json();
-
-        if (data.error) {
-            removeCard();
-            showError(data.error.message);
-        } else {
-            removeCard();
-            getCard({
-                name: data.location.name,
-                country: data.location.country,
-                temp: data.current.temp_c,
-                icon: data.current.condition.icon,
-                text: data.current.condition.text
-            });
+            if (data.error) {
+                removeCard();
+                showError(data.error.message);
+            } else {
+                removeCard();
+                getCard({
+                    name: data.location.name,
+                    country: data.location.country,
+                    temp: data.current.temp_c,
+                    icon: data.current.condition.icon,
+                    text: data.current.condition.text
+                });
+            }
         }
     } catch (error) {
         console.error('Error fetching weather data:', error);
