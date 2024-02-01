@@ -1,9 +1,12 @@
+// Ключ API для доступа к сервису погоды
 const apiKey = '12ba5693f79140ed849174618230911';
 
-const header = document.querySelector('.header');
-const form = document.querySelector('#form');
-const input = document.querySelector('#inputCity');
+// Получаем ссылки на HTML-элементы
+const header = document.querySelector('.header'); // Заголовок
+const form = document.querySelector('#form'); // Форма
+const input = document.querySelector('#inputCity'); // Поле ввода
 
+// Функция для удаления карточки погоды
 function removeCard() {
     const lastCard = document.querySelector('.card');
     if (lastCard) {
@@ -11,11 +14,13 @@ function removeCard() {
     }
 }
 
+// Функция для отображения ошибки
 function showError(message) {
     const html = `<div class="card">${message}</div>`;
     header.insertAdjacentHTML('afterend', html);
 }
 
+// Функция для создания HTML-элемента
 function createCardElement(tag, className, innerHTML = '') {
     const element = document.createElement(tag);
     element.className = className;
@@ -23,7 +28,7 @@ function createCardElement(tag, className, innerHTML = '') {
     return element;
 }
 
-
+// Функция для отображения карточки погоды
 function getCard(weatherData) {
     const card = createCardElement('div', 'card');
 
@@ -45,6 +50,7 @@ function getCard(weatherData) {
     loadWeatherIcon(weatherData.icon);
 }
 
+// Функция для загрузки иконки погоды
 async function loadWeatherIcon(iconUrl) {
     try {
         const response = await axios.get(iconUrl, { responseType: 'blob' });
@@ -61,6 +67,7 @@ async function loadWeatherIcon(iconUrl) {
     }
 }
 
+// Функция для получения данных о погоде
 async function getWeather(city) {
     const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
 
@@ -91,6 +98,7 @@ async function getWeather(city) {
     }
 }
 
+// Обработчик события отправки формы
 form.onsubmit = async (event) => {
     event.preventDefault();
     const city = input.value.trim();
